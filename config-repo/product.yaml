@@ -100,7 +100,7 @@ spring:
       on-profile: prod
   data:
     mongodb:
-      host: mongodb-product
+      host: 172.17.0.1
 
 logging:
   level:

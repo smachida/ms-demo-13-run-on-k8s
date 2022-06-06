@@ -5,7 +5,6 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-cd ..
 if [ $1 = "start" ]; then
 
   echo "Deploying microservice-demo services on k8s development env..."
