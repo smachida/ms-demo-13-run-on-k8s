@@ -70,7 +70,7 @@ kind: Service
 metadata:
   name: gateway-lb
 spec:
-  loadBalancerIP: 172.19.255.200
+#  loadBalancerIP: 172.19.255.200
   type: LoadBalancer
   selector:
     app: gateway
