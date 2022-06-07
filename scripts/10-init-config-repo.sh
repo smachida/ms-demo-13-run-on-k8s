@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-  echo "引数に kind, minikube もしくは production を指定してください"
+  echo "引数に minikube, kind もしくは tce を指定してください"
   exit 1
 fi
 
