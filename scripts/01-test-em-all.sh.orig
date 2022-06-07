@@ -68,7 +68,6 @@ function testUrl() {
 
 function waitForService() {
     url=$@
-    echo "url: $url"
     echo -n "Wait for: $url... "
     n=0
     until testUrl $url

@@ -19,7 +19,7 @@
 function assertCurl() {
 
     local expectedHttpCode=$1
-    local curlCmd="$2 -w \"%{http_code}\""
+    local curlCmd="$2 --insecure -w \"%{http_code}\""
     local result=$(eval $curlCmd)
     local httpCode="${result:(-3)}"
     RESPONSE='' && (( ${#result} > 3 )) && RESPONSE="${result%???}"
@@ -68,7 +68,6 @@ function testUrl() {
 
 function waitForService() {
     url=$@
-    echo "url: $url"
     echo -n "Wait for: $url... "
     n=0
     until testUrl $url
@@ -135,7 +134,7 @@ function recreateComposite() {
     local composite=$2
 
     assertCurl 200 "curl $AUTH -X DELETE -k https://$HOST:$PORT/product-composite/${productId} -s"
-    curl -X POST -k https://$HOST:$PORT/product-composite -H "Content-Type: application/json" -H "Authorization: Bearer $ACCESS_TOKEN" --data "$composite"
+    curl -X POST --insecure -k https://$HOST:$PORT/product-composite -H "Content-Type: application/json" -H "Authorization: Bearer $ACCESS_TOKEN" --data "$composite"
 }
 
 function setupTestdata() {
@@ -267,9 +266,10 @@ then
     docker-compose up -d
 fi
 
-waitForService curl -k https://$HOST:$PORT/actuator/health
+#waitForService curl -k https://$HOST:$PORT/actuator/health --insecure
+waitForService curl -k https://172.19.0.3:31443/actuator/health --insecure
 
-ACCESS_TOKEN=$(curl -k https://writer:secret@$HOST:$PORT/oauth/token -d grant_type=password -d username=vmware -d password=password -s | jq .access_token -r)
+ACCESS_TOKEN=$(curl -k https://writer:secret@$HOST:$PORT/oauth/token -d grant_type=password -d username=vmware -d password=password -s --insecure | jq .access_token -r)
 echo "Access Token: ${ACCESS_TOKEN}"
 AUTH="-H \"Authorization: Bearer $ACCESS_TOKEN\""
 
@@ -310,7 +310,7 @@ assertEqual "\"Type mismatch.\"" "$(echo $RESPONSE | jq .message)"
 assertCurl 401 "curl -k https://$HOST:$PORT/product-composite/$PROD_ID_REVS_RECS -s"
 
 # Verify that the reader - client with only read scope can call the read API but not delete API.
-READER_ACCESS_TOKEN=$(curl -k https://reader:secret@$HOST:$PORT/oauth/token -d grant_type=password -d username=vmware -d password=password -s | jq .access_token -r)
+READER_ACCESS_TOKEN=$(curl -k https://reader:secret@$HOST:$PORT/oauth/token -d grant_type=password -d username=vmware -d password=password -s --insecure | jq .access_token -r)
 READER_AUTH="-H \"Authorization: Bearer $READER_ACCESS_TOKEN\""
 
 assertCurl 200 "curl -k https://$HOST:$PORT/product-composite/$PROD_ID_REVS_RECS $READER_AUTH -s"

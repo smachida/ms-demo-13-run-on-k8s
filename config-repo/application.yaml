@@ -65,6 +65,6 @@ spring:
     activate:
       on-profile: prod
   rabbitmq:
-    host: 172.17.0.1
+    host: rabbitmq
 
 management.endpoints.web.exposure.include: health,info,circuitbreakerevents
