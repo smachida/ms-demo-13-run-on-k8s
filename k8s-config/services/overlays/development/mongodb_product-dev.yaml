@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mongodb-product
-          image: mongo:3.6.9
+          image: mongo
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: mongo
@@ -31,7 +31,7 @@ spec:
             - containerPort: 27017
           resources:
             limits:
-              memory: 300Mi
+              memory: 1024Mi
       volumes:
         - name: initdb-mongo-product
           configMap:

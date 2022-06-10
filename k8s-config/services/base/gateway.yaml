@@ -70,10 +70,11 @@ kind: Service
 metadata:
   name: gateway-lb
 spec:
-#  loadBalancerIP: 172.19.255.200
+  loadBalancerIP: 172.18.255.200
   type: LoadBalancer
   selector:
     app: gateway
   ports:
     - port: 443
       targetPort: 8443
+      nodePort: 30443

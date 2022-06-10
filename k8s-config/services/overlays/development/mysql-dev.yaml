@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:5.7.23
+          image: mysql/mysql-server
           volumeMounts:
             - name: initdb-mysql-review
               mountPath: /docker-entrypoint-initdb.d
           args:
-            - "--ignore-db-dir=lost+found"
+          #  - "--ignore-db-dir=lost+found"
             - "--character-set-server=utf8mb4"
             - "--collation-server=utf8mb4_bin"
           env:
@@ -35,7 +35,7 @@ spec:
             - containerPort: 3306
           resources:
             limits:
-              memory: 300Mi
+              memory: 1024Mi
       volumes:
         - name: initdb-mysql-review
           configMap:
