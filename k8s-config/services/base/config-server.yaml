@@ -52,6 +52,8 @@ spec:
           volumeMounts:
             - name: config-repo-volume
               mountPath: /config-repo
+      imagePullSecrets:
+      - name: docker-cred              
       volumes:
         - name: config-repo-volume
           configMap:

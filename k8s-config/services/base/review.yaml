@@ -51,6 +51,8 @@ spec:
             timeoutSeconds: 5
             failureThreshold: 5
             successThreshold: 1
+      imagePullSecrets:
+      - name: docker-cred            
 ---
 apiVersion: v1
 kind: Service

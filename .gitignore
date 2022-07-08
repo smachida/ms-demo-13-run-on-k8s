@@ -32,3 +32,4 @@ out/
 .vscode/
 
 scripts/k8s/kind/kind-logs/
+**/bin/**

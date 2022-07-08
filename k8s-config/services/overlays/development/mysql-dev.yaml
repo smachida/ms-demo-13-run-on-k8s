@@ -36,6 +36,8 @@ spec:
           resources:
             limits:
               memory: 1024Mi
+      imagePullSecrets:
+      - name: docker-cred              
       volumes:
         - name: initdb-mysql-review
           configMap:
