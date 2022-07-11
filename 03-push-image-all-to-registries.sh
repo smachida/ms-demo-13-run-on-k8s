@@ -32,7 +32,7 @@ echo "pushing the images to the registries..."
 # Caution: be sure to change DOCKERHUB_PRO value to your repository name
 ###
 DOCKERHUB_REPO=smachida
-docker login
+docker login -u $DOCKERHUB_REPO
 
 docker tag ms-demo-13-run-on-k8s-product-service $DOCKERHUB_REPO/ms-demo-13-run-on-k8s-product-service
 docker tag ms-demo-13-run-on-k8s-recommendation-service $DOCKERHUB_REPO/ms-demo-13-run-on-k8s-recommendation-service
